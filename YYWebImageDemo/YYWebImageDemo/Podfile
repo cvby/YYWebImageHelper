@@ -1,0 +1,8 @@
+platform :ios, '7.0'
+
+target "YYWebImageDemo" do
+
+pod 'YYWebImage'
+pod 'Masonry'
+
+end
