@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84DEEC371D17BE4B00DE9AE6 /* guidegif_loop.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84DEEC351D17BE4B00DE9AE6 /* guidegif_loop.gif */; };
+		84DEEC381D17BE4B00DE9AE6 /* guidegif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84DEEC361D17BE4B00DE9AE6 /* guidegif.gif */; };
 		84ED2AE91CF29AB9005DC8F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED2AE81CF29AB9005DC8F3 /* main.m */; };
 		84ED2AEC1CF29AB9005DC8F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED2AEB1CF29AB9005DC8F3 /* AppDelegate.m */; };
 		84ED2AEF1CF29AB9005DC8F3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED2AEE1CF29AB9005DC8F3 /* ViewController.m */; };
@@ -15,12 +17,12 @@
 		84ED2AF71CF29AB9005DC8F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84ED2AF51CF29AB9005DC8F3 /* LaunchScreen.storyboard */; };
 		84ED2B011CF2A536005DC8F3 /* UIImageView+CBDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED2B001CF2A536005DC8F3 /* UIImageView+CBDWebImage.m */; };
 		84ED2B041CF2CE6B005DC8F3 /* YYImageCache+Url.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED2B031CF2CE6B005DC8F3 /* YYImageCache+Url.m */; };
-		84ED2B091CF2F577005DC8F3 /* guidegif_loop.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84ED2B081CF2F577005DC8F3 /* guidegif_loop.gif */; };
-		84ED2B0B1CF2F64B005DC8F3 /* guidegif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84ED2B0A1CF2F64B005DC8F3 /* guidegif.gif */; };
 		C57EE1A31F04D3A865327C68 /* libPods-YYWebImageDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C17FDFA37B118BED0B6DDD6C /* libPods-YYWebImageDemo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84DEEC351D17BE4B00DE9AE6 /* guidegif_loop.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = guidegif_loop.gif; sourceTree = "<group>"; };
+		84DEEC361D17BE4B00DE9AE6 /* guidegif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = guidegif.gif; sourceTree = "<group>"; };
 		84ED2AE41CF29AB9005DC8F3 /* YYWebImageDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YYWebImageDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84ED2AE81CF29AB9005DC8F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		84ED2AEA1CF29AB9005DC8F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -35,8 +37,6 @@
 		84ED2B001CF2A536005DC8F3 /* UIImageView+CBDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CBDWebImage.m"; sourceTree = "<group>"; };
 		84ED2B021CF2CE6B005DC8F3 /* YYImageCache+Url.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YYImageCache+Url.h"; sourceTree = "<group>"; };
 		84ED2B031CF2CE6B005DC8F3 /* YYImageCache+Url.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YYImageCache+Url.m"; sourceTree = "<group>"; };
-		84ED2B081CF2F577005DC8F3 /* guidegif_loop.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = guidegif_loop.gif; path = ../../../../ios_chebada/CarBaDa/CarBaDa/ViewController/Guide/guidegif_loop.gif; sourceTree = "<group>"; };
-		84ED2B0A1CF2F64B005DC8F3 /* guidegif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = guidegif.gif; path = ../../../../ios_chebada/CarBaDa/CarBaDa/ViewController/Guide/guidegif.gif; sourceTree = "<group>"; };
 		C17FDFA37B118BED0B6DDD6C /* libPods-YYWebImageDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YYWebImageDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22345EFD70625014264DACE /* Pods-YYWebImageDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YYWebImageDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YYWebImageDemo/Pods-YYWebImageDemo.release.xcconfig"; sourceTree = "<group>"; };
 		E9188187E3AEF4BEF40D4908 /* Pods-YYWebImageDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YYWebImageDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YYWebImageDemo/Pods-YYWebImageDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,8 +95,8 @@
 				84ED2AFE1CF2A3E7005DC8F3 /* YYWebImageHelper */,
 				84ED2AEA1CF29AB9005DC8F3 /* AppDelegate.h */,
 				84ED2AEB1CF29AB9005DC8F3 /* AppDelegate.m */,
-				84ED2B0A1CF2F64B005DC8F3 /* guidegif.gif */,
-				84ED2B081CF2F577005DC8F3 /* guidegif_loop.gif */,
+				84DEEC351D17BE4B00DE9AE6 /* guidegif_loop.gif */,
+				84DEEC361D17BE4B00DE9AE6 /* guidegif.gif */,
 				84ED2AED1CF29AB9005DC8F3 /* ViewController.h */,
 				84ED2AEE1CF29AB9005DC8F3 /* ViewController.m */,
 				84ED2AF01CF29AB9005DC8F3 /* Main.storyboard */,
@@ -189,9 +189,9 @@
 			files = (
 				84ED2AF71CF29AB9005DC8F3 /* LaunchScreen.storyboard in Resources */,
 				84ED2AF41CF29AB9005DC8F3 /* Assets.xcassets in Resources */,
-				84ED2B091CF2F577005DC8F3 /* guidegif_loop.gif in Resources */,
+				84DEEC371D17BE4B00DE9AE6 /* guidegif_loop.gif in Resources */,
 				84ED2AF21CF29AB9005DC8F3 /* Main.storyboard in Resources */,
-				84ED2B0B1CF2F64B005DC8F3 /* guidegif.gif in Resources */,
+				84DEEC381D17BE4B00DE9AE6 /* guidegif.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

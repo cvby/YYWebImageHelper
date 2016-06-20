@@ -7,7 +7,6 @@
 //
 
 #import "UIImageView+CBDWebImage.h"
-#import <YYWebImage/YYWebImage.h>
 #import "Masonry.h"
 #import <objc/runtime.h>
 
@@ -87,19 +86,20 @@ static char View_Activity;
             [self.activity startAnimating];
         }
     }
-    [self yy_setImageWithURL:imageURL
-                 placeholder:placeholder
-                     options:options
-                     manager:nil
-                    progress:nil
-                   transform:nil
-                  completion:completion];
     __weak typeof(self) weakSelf = self;
-    completion=^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
+    YYWebImageCompletionBlock completionBlock=^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
         //
         [weakSelf.activity stopAnimating];
         NSLog(@"%lu",(unsigned long)from);
+        completion(image, url, from, stage, error);
     };
+    [self yy_setImageWithURL:imageURL
+                 placeholder:placeholder
+                     options:kNilOptions
+                     manager:nil
+                    progress:nil
+                   transform:nil
+                  completion:completionBlock];
 }
 
 @end
