@@ -29,7 +29,7 @@
 
     
     //[self test1];
-    [self test3];
+    [self test4];
     
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -63,6 +63,16 @@
     }];
 }
 
+-(void)test4{
+    UIImageView* imvAd=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
+    [_svImageView addSubview:imvAd];
+    
+    [imvAd  cbd_setImageWithURL:ExampleImageURl placeholder:nil options:kNilOptions progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        NSLog(@"%zd",(receivedSize/expectedSize));
+    } completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
+        NSLog(@"%lu",(unsigned long)from);
+    }];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

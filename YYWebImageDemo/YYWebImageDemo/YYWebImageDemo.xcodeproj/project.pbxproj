@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8402486B1D22182400A17057 /* CBDProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8402486A1D22182400A17057 /* CBDProgressView.m */; };
 		84DEEC371D17BE4B00DE9AE6 /* guidegif_loop.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84DEEC351D17BE4B00DE9AE6 /* guidegif_loop.gif */; };
 		84DEEC381D17BE4B00DE9AE6 /* guidegif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84DEEC361D17BE4B00DE9AE6 /* guidegif.gif */; };
 		84ED2AE91CF29AB9005DC8F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED2AE81CF29AB9005DC8F3 /* main.m */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		840248691D22182400A17057 /* CBDProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBDProgressView.h; sourceTree = "<group>"; };
+		8402486A1D22182400A17057 /* CBDProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBDProgressView.m; sourceTree = "<group>"; };
 		84DEEC351D17BE4B00DE9AE6 /* guidegif_loop.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = guidegif_loop.gif; sourceTree = "<group>"; };
 		84DEEC361D17BE4B00DE9AE6 /* guidegif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = guidegif.gif; sourceTree = "<group>"; };
 		84ED2AE41CF29AB9005DC8F3 /* YYWebImageDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YYWebImageDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +122,8 @@
 		84ED2AFE1CF2A3E7005DC8F3 /* YYWebImageHelper */ = {
 			isa = PBXGroup;
 			children = (
+				840248691D22182400A17057 /* CBDProgressView.h */,
+				8402486A1D22182400A17057 /* CBDProgressView.m */,
 				84ED2AFF1CF2A536005DC8F3 /* UIImageView+CBDWebImage.h */,
 				84ED2B001CF2A536005DC8F3 /* UIImageView+CBDWebImage.m */,
 				84ED2B021CF2CE6B005DC8F3 /* YYImageCache+Url.h */,
@@ -253,6 +258,7 @@
 				84ED2AEF1CF29AB9005DC8F3 /* ViewController.m in Sources */,
 				84ED2B011CF2A536005DC8F3 /* UIImageView+CBDWebImage.m in Sources */,
 				84ED2AEC1CF29AB9005DC8F3 /* AppDelegate.m in Sources */,
+				8402486B1D22182400A17057 /* CBDProgressView.m in Sources */,
 				84ED2AE91CF29AB9005DC8F3 /* main.m in Sources */,
 				84ED2B041CF2CE6B005DC8F3 /* YYImageCache+Url.m in Sources */,
 			);
