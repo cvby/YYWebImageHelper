@@ -20,7 +20,7 @@ typedef enum{
 
 @interface UIImageView (CBDWebImage)
 
-@property (nullable, nonatomic, strong) NSURL *cbd_imageURL;
+@property (nullable, nonatomic, strong) NSString *cbd_imageURL;
 
 /**
  @param 附加上的控件
@@ -33,12 +33,12 @@ typedef enum{
 @property (nonatomic, assign) enumLoadingType loadType;
 
 
-- (void)cbd_setImageWithURL:(nullable NSURL *)imageURL
+- (void)cbd_setImageWithURL:(nullable NSString *)imageURL
                 placeholder:(nullable UIImage *)placeholder
                     options:(YYWebImageOptions)options
                  completion:(nullable YYWebImageCompletionBlock)completion;
 
-- (void)cbd_setImageWithURL:(nullable NSURL *)imageURL
+- (void)cbd_setImageWithURL:(nullable NSString *)imageURL
                 placeholder:(nullable UIImage *)placeholder
                     options:(YYWebImageOptions)options
                    progress:(nullable YYWebImageProgressBlock)progress

@@ -54,24 +54,23 @@ static char Value_loadType;
 
 #pragma mark - Method
 
-- (NSURL *)cbd_imageURL {
-    return [self yy_imageURL];
+- (NSString *)cbd_imageURL {
+    return [[self yy_imageURL] absoluteString];
 }
 
--(void)setCbd_imageURL:(NSURL *)cbd_imageURL{
-    
+-(void)setCbd_imageURL:(NSString *)cbd_imageURL{
     [self cbd_setImageWithURL:cbd_imageURL placeholder:nil options:kNilOptions completion:nil];
 }
 
 
-- (void)cbd_setImageWithURL:(NSURL *)imageURL
+- (void)cbd_setImageWithURL:(NSString *)imageURL
                placeholder:(UIImage *)placeholder
                    options:(YYWebImageOptions)options
                 completion:(YYWebImageCompletionBlock)completion {
     [self cbd_setImageWithURL:imageURL placeholder:placeholder options:options progress:nil completion:completion];
 }
 
-- (void)cbd_setImageWithURL:(NSURL *)imageURL
+- (void)cbd_setImageWithURL:(NSString *)imageURL
                 placeholder:(UIImage *)placeholder
                     options:(YYWebImageOptions)options
                     progress:(YYWebImageProgressBlock)progress
@@ -122,7 +121,7 @@ static char Value_loadType;
             progress(receivedSize,expectedSize);
         }
     };
-    [self yy_setImageWithURL:imageURL
+    [self yy_setImageWithURL:[NSURL URLWithString:imageURL]
                  placeholder:placeholder
                      options:kNilOptions
                      manager:nil
