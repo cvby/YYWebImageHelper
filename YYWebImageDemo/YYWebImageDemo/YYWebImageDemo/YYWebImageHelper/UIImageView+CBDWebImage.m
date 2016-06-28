@@ -14,6 +14,8 @@
 
 @dynamic activity;
 @dynamic progressView;
+@dynamic loadType;
+
 static char View_Activity;
 static char View_ProgressView;
 static char Value_loadType;
@@ -94,7 +96,9 @@ static char Value_loadType;
         {
             [weakSelf.progressView removeFromSuperview];
         }
-        completion(image, url, from, stage, error);
+        if(completion){
+            completion(image, url, from, stage, error);
+        }
     };
     YYWebImageProgressBlock progressBlock=^(NSInteger receivedSize, NSInteger expectedSize){
         float x=(receivedSize* 1.0)/(expectedSize* 1.0);
@@ -114,7 +118,9 @@ static char Value_loadType;
                 }
             }
         }
-        progress(receivedSize,expectedSize);
+        if(progress){
+            progress(receivedSize,expectedSize);
+        }
     };
     [self yy_setImageWithURL:imageURL
                  placeholder:placeholder

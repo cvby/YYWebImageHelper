@@ -8,6 +8,8 @@
 
 #import "CBDProgressView.h"
 
+#define ProgressRadius 3.0
+
 @interface CBDProgressView()
 
 @property (nonatomic,strong)CALayer *progressLayer;
@@ -20,9 +22,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [self setBackgroundColor:[UIColor grayColor]];
+        [self.layer setMasksToBounds:YES];
+        [self.layer setCornerRadius:ProgressRadius];
+        //防止万一，不脱离边界
+        self.clipsToBounds = YES;
+        
         self.progressLayer = [CALayer layer];
         self.progressLayer.frame =CGRectMake(0,0,0, frame.size.height);
         self.progressLayer.backgroundColor = [UIColor cyanColor].CGColor;
+        [self.progressLayer setMasksToBounds:YES];
+        [self.progressLayer setCornerRadius:ProgressRadius];
         [self.layer addSublayer:self.progressLayer];
     }
     return self;

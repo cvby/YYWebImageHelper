@@ -29,7 +29,7 @@
 
     
     //[self test1];
-    [self test3];
+    [self test2];
     
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -49,6 +49,7 @@
 
 -(void)test2{
     UIImageView* imvAd=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
+    imvAd.loadType=enumLoadProgressLine;
     [_svImageView addSubview:imvAd];
     imvAd.cbd_imageURL=ExampleImageURl;
 }
