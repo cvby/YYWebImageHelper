@@ -29,7 +29,7 @@
 
     
     //[self test1];
-    [self test4];
+    [self test3];
     
     // Do any additional setup after loading the view, typically from a nib.
 }

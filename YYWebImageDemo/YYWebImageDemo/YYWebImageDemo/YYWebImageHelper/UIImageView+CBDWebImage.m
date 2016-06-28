@@ -57,39 +57,8 @@ static char Value_loadType;
 }
 
 -(void)setCbd_imageURL:(NSURL *)cbd_imageURL{
-    if(!self.activity)
-    {
-        self.activity=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.activity.frame = CGRectMake(0, 0, 30, 30);
-        [self addSubview:self.activity];
-        [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_offset(0);
-            make.centerX.mas_offset(0);
-        }];
-        [self.activity startAnimating];
-    }else
-    {
-        if(!self.activity.isAnimating)
-        {
-            [self.activity startAnimating];
-        }
-    }
-    __weak typeof(self) weakSelf = self;
-    [self yy_setImageWithURL:cbd_imageURL
-                 placeholder:nil
-                     options:kNilOptions
-                     manager:nil
-                    progress:nil
-                   transform:nil
-                  completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
-                      //
-                      [weakSelf.activity stopAnimating];
-                      if(error)
-                      {
-                          NSLog(@"%@",error.description);
-                      }
-                      NSLog(@"%lu",(unsigned long)from);
-                  }];
+    
+    [self cbd_setImageWithURL:cbd_imageURL placeholder:nil options:kNilOptions completion:nil];
 }
 
 
@@ -97,36 +66,7 @@ static char Value_loadType;
                placeholder:(UIImage *)placeholder
                    options:(YYWebImageOptions)options
                 completion:(YYWebImageCompletionBlock)completion {
-    if(!self.activity)
-    {
-        self.activity=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.activity.frame = CGRectMake(0, 0, 30, 30);
-        [self addSubview:self.activity];
-        [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.mas_offset(0);
-        }];
-        [self.activity startAnimating];
-    }else
-    {
-        if(!self.activity.isAnimating)
-        {
-            [self.activity startAnimating];
-        }
-    }
-    __weak typeof(self) weakSelf = self;
-    YYWebImageCompletionBlock completionBlock=^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
-        //
-        [weakSelf.activity stopAnimating];
-        NSLog(@"%lu",(unsigned long)from);
-        completion(image, url, from, stage, error);
-    };
-    [self yy_setImageWithURL:imageURL
-                 placeholder:placeholder
-                     options:kNilOptions
-                     manager:nil
-                    progress:nil
-                   transform:nil
-                  completion:completionBlock];
+    [self cbd_setImageWithURL:imageURL placeholder:placeholder options:options progress:nil completion:completion];
 }
 
 - (void)cbd_setImageWithURL:(NSURL *)imageURL
@@ -134,20 +74,23 @@ static char Value_loadType;
                     options:(YYWebImageOptions)options
                     progress:(YYWebImageProgressBlock)progress
                  completion:(YYWebImageCompletionBlock)completion {
-    if(!self.progressView)
+    if(self.loadType==enumLoadActivityIndicator)
     {
-        self.progressView=[[CBDProgressView alloc] initWithFrame:CGRectMake(0, 0, 0, 3)];
-        self.progressView.progress=0.0;
-        [self addSubview:self.progressView];
-        [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.mas_offset(0);
-            make.width.mas_equalTo(0.618*self.frame.size.width);//黄金比例
-            make.height.mas_equalTo(3);
-        }];
+        self.activity=[self createLoadingView];
+        if(!self.activity.isAnimating)
+        {
+            [self.activity startAnimating];
+        }
+    }else if(self.loadType==enumLoadProgressLine)
+    {
+        self.progressView=[self createLoadingView];
     }
     __weak typeof(self) weakSelf = self;
     YYWebImageCompletionBlock completionBlock=^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
-        if(weakSelf.progressView)
+        if(weakSelf.loadType==enumLoadActivityIndicator)
+        {
+            [weakSelf.activity stopAnimating];
+        }else if(weakSelf.loadType==enumLoadProgressLine)
         {
             [weakSelf.progressView removeFromSuperview];
         }
@@ -155,14 +98,20 @@ static char Value_loadType;
     };
     YYWebImageProgressBlock progressBlock=^(NSInteger receivedSize, NSInteger expectedSize){
         float x=(receivedSize* 1.0)/(expectedSize* 1.0);
-        if(x>=0)
+        if(weakSelf.loadType==enumLoadActivityIndicator)
         {
-            weakSelf.progressView.progress=x;
-        }else
+            [weakSelf.activity stopAnimating];
+        }else if(weakSelf.loadType==enumLoadProgressLine)
         {
-            if(weakSelf.progressView)
+            if(x>=0)
             {
-                [weakSelf.progressView removeFromSuperview];
+                weakSelf.progressView.progress=x;
+            }else
+            {
+                if(weakSelf.progressView)
+                {
+                    [weakSelf.progressView removeFromSuperview];
+                }
             }
         }
         progress(receivedSize,expectedSize);
@@ -179,24 +128,30 @@ static char Value_loadType;
 -(id)createLoadingView{
     if(self.loadType==enumLoadActivityIndicator)
     {
-        self.activity=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.activity.frame = CGRectMake(0, 0, 30, 30);
-        [self addSubview:self.activity];
-        [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_offset(0);
-            make.centerX.mas_offset(0);
-        }];
+        if(!self.activity)
+        {
+            self.activity=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            self.activity.frame = CGRectMake(0, 0, 30, 30);
+            [self addSubview:self.activity];
+            [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.mas_offset(0);
+                make.centerX.mas_offset(0);
+            }];
+        }
         return self.activity;
     }else if(self.loadType==enumLoadProgressLine)
     {
-        self.progressView=[[CBDProgressView alloc] initWithFrame:CGRectMake(0, 0, 0, 3)];
-        self.progressView.progress=0.0;
-        [self addSubview:self.progressView];
-        [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.mas_offset(0);
-            make.width.mas_equalTo(0.618*self.frame.size.width);//黄金比例
-            make.height.mas_equalTo(3);
-        }];
+        if(!self.progressView)
+        {
+            self.progressView=[[CBDProgressView alloc] initWithFrame:CGRectMake(0, 0, 0, 3)];
+            self.progressView.progress=0.0;
+            [self addSubview:self.progressView];
+            [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.center.mas_offset(0);
+                make.width.mas_equalTo(0.618*self.frame.size.width);//黄金比例
+                make.height.mas_equalTo(3);
+            }];
+        }
         return self.progressView;
     }else
     {
