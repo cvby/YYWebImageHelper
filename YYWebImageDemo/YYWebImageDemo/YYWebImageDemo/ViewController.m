@@ -51,7 +51,7 @@
 
 -(void)test2{
     UIImageView* imvAd=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
-    imvAd.loadType=enumLoadProgressLine;
+    imvAd.loadType=enumLoadActivityIndicator;
     [_svImageView addSubview:imvAd];
     imvAd.cbd_imageURL=ExampleImageURlString;
 }

@@ -9,6 +9,15 @@
 #import "UIImageView+CBDWebImage.h"
 #import "Masonry.h"
 #import <objc/runtime.h>
+#import <pthread.h>
+
+static inline void _cbd_dispatch_sync_on_main_queue(void (^block)()) {
+    if (pthread_main_np()) {
+        block();
+    } else {
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
+}
 
 @implementation UIImageView (CBDWebImage)
 
@@ -75,17 +84,20 @@ static char Value_loadType;
                     options:(YYWebImageOptions)options
                     progress:(YYWebImageProgressBlock)progress
                  completion:(YYWebImageCompletionBlock)completion {
-    if(self.loadType==enumLoadActivityIndicator)
-    {
-        self.activity=[self createLoadingView];
-        if(!self.activity.isAnimating)
+    _cbd_dispatch_sync_on_main_queue(^{
+        if(self.loadType==enumLoadActivityIndicator)
         {
-            [self.activity startAnimating];
+            self.activity=[self createLoadingView];
+            if(!self.activity.isAnimating)
+            {
+                [self.activity startAnimating];
+            }
+        }else if(self.loadType==enumLoadProgressLine)
+        {
+            self.progressView=[self createLoadingView];
         }
-    }else if(self.loadType==enumLoadProgressLine)
-    {
-        self.progressView=[self createLoadingView];
-    }
+    });
+    
     __weak typeof(self) weakSelf = self;
     YYWebImageCompletionBlock completionBlock=^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
         if(weakSelf.loadType==enumLoadActivityIndicator)
@@ -101,10 +113,7 @@ static char Value_loadType;
     };
     YYWebImageProgressBlock progressBlock=^(NSInteger receivedSize, NSInteger expectedSize){
         float x=(receivedSize* 1.0)/(expectedSize* 1.0);
-        if(weakSelf.loadType==enumLoadActivityIndicator)
-        {
-            [weakSelf.activity stopAnimating];
-        }else if(weakSelf.loadType==enumLoadProgressLine)
+        if(weakSelf.loadType==enumLoadProgressLine)
         {
             if(x>=0)
             {
