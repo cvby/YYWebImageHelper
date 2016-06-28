@@ -68,19 +68,26 @@ static char Value_loadType;
 }
 
 -(void)setCbd_imageURL:(NSString *)cbd_imageURL{
-    [self cbd_setImageWithURL:cbd_imageURL placeholder:nil options:kNilOptions completion:nil];
+    [self cbd_setImageWithURL:cbd_imageURL placeholder:nil completion:nil];
 }
 
 
 - (void)cbd_setImageWithURL:(NSString *)imageURL
-               placeholder:(UIImage *)placeholder
-                   options:(YYWebImageOptions)options
+               placeholder:(NSString *)placeholder
                 completion:(YYWebImageCompletionBlock)completion {
-    [self cbd_setImageWithURL:imageURL placeholder:placeholder options:options progress:nil completion:completion];
+    [self cbd_setImageWithURL:imageURL placeholder:placeholder failImage:nil completion:completion];
 }
 
 - (void)cbd_setImageWithURL:(NSString *)imageURL
-                placeholder:(UIImage *)placeholder
+                placeholder:(NSString *)placeholder
+                  failImage:(NSString *)failImage
+                 completion:(YYWebImageCompletionBlock)completion {
+    [self cbd_setImageWithURL:imageURL placeholder:placeholder failImage:failImage options:kNilOptions progress:nil completion:completion];
+}
+
+- (void)cbd_setImageWithURL:(NSString *)imageURL
+                placeholder:(NSString *)placeholder
+                  failImage:(NSString *)failImage
                     options:(YYWebImageOptions)options
                     progress:(YYWebImageProgressBlock)progress
                  completion:(YYWebImageCompletionBlock)completion {
@@ -107,6 +114,10 @@ static char Value_loadType;
         {
             [weakSelf.progressView removeFromSuperview];
         }
+        if(error)
+        {
+            [self setImage:[UIImage imageNamed:failImage]];
+        }
         if(completion){
             completion(image, url, from, stage, error);
         }
@@ -131,7 +142,7 @@ static char Value_loadType;
         }
     };
     [self yy_setImageWithURL:[NSURL URLWithString:imageURL]
-                 placeholder:placeholder
+                 placeholder:[UIImage imageNamed:placeholder]
                      options:kNilOptions
                      manager:nil
                     progress:progressBlock

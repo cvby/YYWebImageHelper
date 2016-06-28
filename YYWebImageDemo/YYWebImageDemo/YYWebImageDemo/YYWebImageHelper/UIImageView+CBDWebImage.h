@@ -34,12 +34,17 @@ typedef enum{
 
 
 - (void)cbd_setImageWithURL:(nullable NSString *)imageURL
-                placeholder:(nullable UIImage *)placeholder
-                    options:(YYWebImageOptions)options
+                placeholder:(nullable NSString *)placeholder
                  completion:(nullable YYWebImageCompletionBlock)completion;
 
 - (void)cbd_setImageWithURL:(nullable NSString *)imageURL
-                placeholder:(nullable UIImage *)placeholder
+                placeholder:(nullable NSString *)placeholder
+                  failImage:(nullable NSString *)failImage
+                 completion:(nullable YYWebImageCompletionBlock)completion;
+
+- (void)cbd_setImageWithURL:(nullable NSString *)imageURL
+                placeholder:(nullable NSString *)placeholder
+                  failImage:(nullable NSString *)failImage
                     options:(YYWebImageOptions)options
                    progress:(nullable YYWebImageProgressBlock)progress
                  completion:(nullable YYWebImageCompletionBlock)completion;
