@@ -16,6 +16,7 @@
 @dynamic progressView;
 static char View_Activity;
 static char View_ProgressView;
+static char Value_loadType;
 
 #pragma mark - Property
 
@@ -37,6 +38,16 @@ static char View_ProgressView;
     [self willChangeValueForKey:@"progressView"];
     objc_setAssociatedObject(self, &View_ProgressView, progressView, OBJC_ASSOCIATION_RETAIN);
     [self didChangeValueForKey:@"progressView"];
+}
+
+- (enumLoadingType)loadType
+{
+    return [objc_getAssociatedObject(self, &Value_loadType) intValue];
+}
+
+-(void)setLoadType:(enumLoadingType)_loadType
+{
+    objc_setAssociatedObject(self, &Value_loadType, @(_loadType), OBJC_ASSOCIATION_ASSIGN);
 }
 
 #pragma mark - Method
@@ -165,5 +176,32 @@ static char View_ProgressView;
                   completion:completionBlock];
 }
 
+-(id)createLoadingView{
+    if(self.loadType==enumLoadActivityIndicator)
+    {
+        self.activity=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.activity.frame = CGRectMake(0, 0, 30, 30);
+        [self addSubview:self.activity];
+        [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_offset(0);
+            make.centerX.mas_offset(0);
+        }];
+        return self.activity;
+    }else if(self.loadType==enumLoadProgressLine)
+    {
+        self.progressView=[[CBDProgressView alloc] initWithFrame:CGRectMake(0, 0, 0, 3)];
+        self.progressView.progress=0.0;
+        [self addSubview:self.progressView];
+        [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_offset(0);
+            make.width.mas_equalTo(0.618*self.frame.size.width);//黄金比例
+            make.height.mas_equalTo(3);
+        }];
+        return self.progressView;
+    }else
+    {
+        return nil;
+    }
+}
 
 @end

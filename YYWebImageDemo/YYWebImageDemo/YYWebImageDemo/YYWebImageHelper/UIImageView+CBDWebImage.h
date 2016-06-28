@@ -10,11 +10,28 @@
 #import <YYWebImage/YYWebImage.h>
 #import "CBDProgressView.h"
 
+/** Loading样式
+ */
+typedef enum{
+    enumLoadActivityIndicator,  //菊花
+    enumLoadProgressLine,       //进度直线
+    enumLoadNone                //无
+} enumLoadingType;
+
 @interface UIImageView (CBDWebImage)
 
 @property (nullable, nonatomic, strong) NSURL *cbd_imageURL;
+
+/**
+ @param 附加上的控件
+ */
 @property (nullable, nonatomic, strong,getter=activity) UIActivityIndicatorView *activity;
 @property (nullable, nonatomic, strong) CBDProgressView *progressView;
+/**
+ @param loadType    展示类型
+ */
+@property (nonatomic, assign) enumLoadingType loadType;
+
 
 - (void)cbd_setImageWithURL:(nullable NSURL *)imageURL
                 placeholder:(nullable UIImage *)placeholder
